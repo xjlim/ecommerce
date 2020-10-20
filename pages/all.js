@@ -13,20 +13,20 @@ export default function AllPage() {
   );
 }
 
-// export async function getStaticProps() {
-//   const apolloClient = initializeApollo();
+export async function getStaticProps() {
+  const apolloClient = initializeApollo();
 
-//   await apolloClient.query({
-//     query: ALL_PRODUCTS_QUERY,
-//     variables: {
-//       type: "all",
-//     },
-//   });
+  await apolloClient.query({
+    query: ALL_PRODUCTS_QUERY,
+    variables: {
+      type: "all",
+    },
+  });
 
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract(),
-//     },
-//     revalidate: 1,
-//   };
-// }
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract(),
+    },
+    revalidate: 1,
+  };
+}

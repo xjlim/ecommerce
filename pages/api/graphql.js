@@ -28,15 +28,12 @@ const resolvers = {
       switch (type) {
         case "all":
           result = data;
-          console.log("all", result);
           break;
         case "men":
           result = data.filter((x) => x.gender.toLowerCase() === "male");
-          console.log("men", result);
           break;
         case "women":
           result = data.filter((x) => x.gender.toLowerCase() === "female");
-          console.log("women", result);
           break;
         default:
           result = [];
