@@ -7,7 +7,7 @@ export default function AllPage() {
   return (
     <div>
       <Header />
-      <Store type="all" />
+      <Store type="women" />
       <Footer />
     </div>
   );
@@ -19,7 +19,7 @@ export async function getStaticProps() {
   await apolloClient.query({
     query: ALL_PRODUCTS_QUERY,
     variables: {
-      type: "all",
+      type: "women",
     },
   });
 
