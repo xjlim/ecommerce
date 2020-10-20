@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const links = [
   { label: "About" },
   { label: "Company" },
@@ -31,15 +29,15 @@ export default function Footer() {
       </div>
       <div className="flex p-12">
         <ul className="flex flex-col flex-1 items-start mx-5 text-sm">
-          {links.map(({ href, label }) => (
-            <li className="my-1 mx-1 px-3">
+          {links.map(({ label }) => (
+            <li key={label} className="my-1 mx-1 px-3">
               <a className="text-black font-light no-underline">{label}</a>
             </li>
           ))}
         </ul>
         <ul className="flex flex-col flex-auto items-start text-sm">
-          {socialLinks.map(({ href, label }) => (
-            <li className="my-1 mx-1 px-3">
+          {socialLinks.map(({ label }) => (
+            <li key={label} className="my-1 mx-1 px-3">
               <a className="text-black font-light no-underline">{label}</a>
             </li>
           ))}

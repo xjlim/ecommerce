@@ -16,13 +16,18 @@ export default function Header() {
           Skyline Ivy
         </h1>
       </div>
-      <hr className="text-gray-500" />
-      <nav>
+      <nav className="mx-24">
+        <hr className="text-gray-500" />
         <ul className="flex justify-center items-center p-1 text-sm">
           {links.map(({ href, label }) => (
-            <li className="my-1 mx-1 px-3 border-solid border-gray-500 border-l border-r">
-              <Link key={`${label}`} href={href}>
-                <a className="hover:text-orange-500 text-black font-light no-underline">{label}</a>
+            <li
+              key={`${label}`}
+              className="my-1 mx-1 px-3 border-solid border-gray-500 border-l border-r"
+            >
+              <Link href={href}>
+                <a className="hover:text-orange-500 text-black font-light no-underline">
+                  {label}
+                </a>
               </Link>
             </li>
           ))}
