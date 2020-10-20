@@ -22,7 +22,7 @@ export default function Header() {
           {links.map(({ href, label }) => (
             <li
               key={`${label}`}
-              className="my-1 mx-1 px-3 border-solid border-gray-500 border-l border-r"
+              className="my-1 mx-1 px-5 border-solid border-gray-500 border-l border-r"
             >
               <Link href={href}>
                 <a className="hover:text-orange-500 text-black font-light no-underline">

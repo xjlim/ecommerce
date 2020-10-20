@@ -15,17 +15,23 @@ const typeDefs = gql`
   }
 
   type Query {
-    products(type: String, price: String): [Product!]!
+    products(type: String, price: String, id: String): [Product!]!
   }
 `;
 
 const resolvers = {
   Query: {
     products(parent, args, context) {
-      const type = args.type.toLowerCase();
+      const type = args.type;
+      const id = args.id;
       const price = args.price;
+
+      if (id) {
+        return data.filter((x) => x.id.toLowerCase() === id.toLowerCase());
+      }
+
       let result;
-      switch (type) {
+      switch (type.toLowerCase()) {
         case "all":
           result = data;
           break;

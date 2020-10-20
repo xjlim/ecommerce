@@ -1,17 +1,22 @@
 import { gql, useQuery } from "@apollo/client";
+import Link from "next/link";
+
+function formatPrice(price) {
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  });
+  return formatter.format(price);
+}
 
 export const ALL_PRODUCTS_QUERY = gql`
   query products($type: String!) {
     products(type: $type) {
-      gender
       id
-      color
-      description
-      name
-      review
-      starrating
-      price
       img
+      price
+      name
     }
   }
 `;
@@ -29,22 +34,26 @@ export default function Store({ type }) {
 
   return (
     <>
-      <pre>{JSON.stringify(data, null, 4)}</pre>
-      <div className="flex mx-24 justify-center">
+      <div className="flex mx-24 my-6 justify-center">
         <div className="w-3/4 grid grid-flow-row grid-cols-3 gap-4">
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
-          <div>10</div>
+          {data.products.map(({ id, img, price, name }) => (
+            <div
+              className="flex flex-col justify-center items-center p-4"
+              key={id}
+            >
+              <img className="w-48 h-48" src={`/products/${img}`} />
+              <div>{name}</div>
+              <div className="m-1">{formatPrice(price)}</div>
+              <Link href={`/product/${id}`}>
+                <button className=" border-solid border-2 border-gray-900 border-opacity-50 hover:bg-black hover:text-white py-1 px-4">
+                  View Item
+                </button>
+              </Link>
+            </div>
+          ))}
         </div>
-        <div className="w-1/4">
-          <h4>Special Sale</h4>
+        <div className="w-1/4 m-8">
+          <h4 className="my-4">Special Sale</h4>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
             magnam nihil voluptatum, odio, architecto temporibus nemo, ullam
