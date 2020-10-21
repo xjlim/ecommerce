@@ -1,5 +1,6 @@
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "../lib/apolloClient";
+import { CartProvider } from "../components/cartProvider";
 import "../styles/index.css";
 
 export default function App({ Component, pageProps }) {
@@ -7,7 +8,9 @@ export default function App({ Component, pageProps }) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <Component {...pageProps} />
+      <CartProvider>
+        <Component {...pageProps} />
+      </CartProvider>
     </ApolloProvider>
   );
 }

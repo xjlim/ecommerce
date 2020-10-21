@@ -3,7 +3,7 @@ import Footer from "../components/footer";
 import Store, { ALL_PRODUCTS_QUERY } from "../components/store";
 import { initializeApollo } from "../lib/apolloClient";
 
-export default function AllPage() {
+export default function WomenPage() {
   return (
     <div>
       <Header />
