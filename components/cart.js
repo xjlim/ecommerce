@@ -1,7 +1,8 @@
 import Link from "next/link";
 import cn from "classnames";
 import { useCart } from "./cartProvider";
-import Checkout from './checkout';
+import { useCheckoutStatus } from "./checkoutStatusProvider";
+import Checkout from "./checkout";
 
 const SHOPPING_STEP = "shopping_step";
 const CHECKOUT_STEP = "checkout_step";
@@ -47,6 +48,7 @@ function Detail({ step }) {
 
 export default function Cart() {
   const cartData = useCart();
+  const checkoutStatus = useCheckoutStatus();
 
   const buttonStyle = (toggle) =>
     cn(
@@ -58,7 +60,9 @@ export default function Cart() {
     );
 
   let step;
-  if (cartData && cartData.length > 0) {
+  if (checkoutStatus === "ORDER_COMPLETE") {
+    step = ORDER_COMPLETE_STEP;
+  } else if (cartData && cartData.length > 0) {
     step = CHECKOUT_STEP;
   } else {
     step = SHOPPING_STEP;

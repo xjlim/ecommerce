@@ -32,6 +32,8 @@ const reducer = (state, action) => {
       ];
     case "DELETE":
       return state.filter((x) => x.id !== action.payload.id);
+    case "RESET":
+      return []
     default:
       throw new Error(`Unknown action: ${action.type}`);
   }

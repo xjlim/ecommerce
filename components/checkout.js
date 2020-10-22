@@ -2,6 +2,13 @@ import { useCart, useDispatchCart } from "./cartProvider";
 import { formatPrice } from "../lib/utils";
 import React from "react";
 import Counter from "./counter";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./checkoutForm";
+
+const promise = loadStripe(
+  "pk_test_517GbKcFgBQK1UBBLs4hBNIPNWZPn7g9cn89ljfLCrrUWtYR5Zdf0aXiveSrftoopGRVYfw26M9C4ej2e6xh38goG005iChIgdt"
+);
 
 export default function Checkout() {
   const cartData = useCart();
@@ -64,8 +71,27 @@ export default function Checkout() {
         ))}
       </ul>
       <div className="flex mt-10 w-8/12">
-        <p className="w-1/2">Please enter your payment details:</p>
-        <div className="w-1/2 grid grid-cols-2 grid-rows-3 gap-4">
+        <div className="w-3/5 mx-2 flex flex-col">
+          <p>Please enter your payment details:</p>
+          <p className="text-sm">
+            Test using these Stripe test credit card numbers with any CVC,
+            postal code, and expiration date in the future:
+            <li>4242 4242 4242 4242</li>
+            <li>
+              4000 0027 6000 3184 (requires authentication, will trigger a
+              pop-up)
+            </li>
+            <li>
+              4000 0000 0000 9995 (will decline with a decline code of
+              insufficient funds)
+            </li>
+          </p>
+          <Elements stripe={promise}>
+            <CheckoutForm />
+          </Elements>
+        </div>
+
+        <div className="w-2/5 mx-2 grid grid-cols-2 grid-rows-3 gap-4">
           <div>Subtotal:</div>
           <div>{formatPrice(cartTotal)}</div>
           <div>Shipping:</div>
